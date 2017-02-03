@@ -25,7 +25,7 @@ class Searcher
   def results
     @results ||= grouped_by_primary_keys_trips.values.map do |trip_set|
       trip_set.sort do |t1, t2| 
-        get_priority_for_trip(t1) <=> get_priority_for_trip(t2)
+        get_priority_for_trip(t2) <=> get_priority_for_trip(t1)
       end.first
     end
   end
@@ -53,6 +53,6 @@ class Searcher
     # @params [Hash] trip 
     # @return [Integer] priority
     def get_priority_for_trip(trip)
-      sources['source']
+      sources[trip['source']]
     end
 end
